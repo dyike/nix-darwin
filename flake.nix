@@ -32,9 +32,9 @@
     nix-darwin,
     ...
   }: let
-    username = "bytedance";
+    username = "ityike";
     system = "aarch64-darwin"; # aarch64-darwin or x86_64-darwin
-    hostname = "LPG754W7TV";
+    hostname = "ityikes-Mac-mini";
 
     specialArgs =
       inputs
