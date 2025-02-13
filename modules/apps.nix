@@ -7,8 +7,15 @@
   #
   # Related Discussion: https://discourse.nixos.org/t/darwin-again/29331
   environment.systemPackages = with pkgs; [
+    ffmpeg-full
+    neovim
     git
+    jq
+    wget
+    curl
   ];
+
+  environment.variables.EDITOR = "nvim";
 
   # TODO To make this work, homebrew need to be installed manually, see https://brew.sh
   #
@@ -23,6 +30,20 @@
       # cleanup = "zap";
     };
 
+    # Applications to install from Mac App Store using mas.
+    # You need to install all these Apps manually first so that your apple account have records for them.
+    # otherwise Apple Store will refuse to install them.
+    # For details, see https://github.com/mas-cli/mas 
+    masApps = {
+      Xcode = 497799835;
+      # Wechat = 836500024;
+      # NeteaseCloudMusic = 944848654;
+      # QQ = 451108668;
+      # WeCom = 1189898970;  # Wechat for Work
+      # TecentMetting = 1484048379;
+      # QQMusic = 595615424;
+    };
+
     taps = [
       "homebrew/services"
     ];
@@ -30,14 +51,15 @@
     # `brew install`
     # TODO Feel free to add your favorite apps here.
     brews = [
-      # "aria2"  # download tool
-	"git"
+      # "wget" # download tool
+      # "curl" # no not install curl via nixpkgs, it's not working well on macOS!
     ];
 
     # `brew install --cask`
     # TODO Feel free to add your favorite apps here.
     casks = [
-    	"google-chrome"
+      # "google-chrome"
+      # "raycast"
     ];
   };
 }
