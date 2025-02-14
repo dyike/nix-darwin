@@ -7,6 +7,8 @@
   #
   # Related Discussion: https://discourse.nixos.org/t/darwin-again/29331
   environment.systemPackages = with pkgs; [
+    htop
+    neofetch
     ffmpeg-full
     neovim
     git
@@ -58,8 +60,8 @@
     # `brew install --cask`
     # TODO Feel free to add your favorite apps here.
     casks = [
-      # "google-chrome"
-      # "raycast"
+      "google-chrome"
+      "raycast"
     ];
   };
 }

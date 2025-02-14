@@ -1,22 +1,18 @@
 {
   description = "Nix for macOS configuration";
 
-  # the nixConfig here only affects the flake itself, not the system configuration!
-  # nixConfig = {
-  #   substituters = [
-  #     # Query the mirror of USTC first, and then the official cache.
-  #     "https://mirrors.ustc.edu.cn/nix-channels/store"
-  #     "https://cache.nixos.org"
-  #   ];
-  # };
-
   # This is the standard format for flake.nix. `inputs` are the dependencies of the flake,
   # Each item in `inputs` will be passed as a parameter to the `outputs` function after being pulled and built.
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-23.05";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-21.05";
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -30,16 +26,18 @@
     self,
     nixpkgs,
     nix-darwin,
+    home-manager,
     ...
   }: let
     username = "ityike";
+    useremail = "yuanfeng634@gmail.com";
     system = "aarch64-darwin"; # aarch64-darwin or x86_64-darwin
     hostname = "ityikes-Mac-mini";
 
     specialArgs =
       inputs
       // {
-        inherit username hostname;
+        inherit username useremail hostname;
       };
   in {
     darwinConfigurations."${hostname}" = nix-darwin.lib.darwinSystem {
@@ -49,6 +47,15 @@
         ./modules/system.nix
         ./modules/apps.nix
         ./modules/host-users.nix
+
+        # home home-manager
+        home-manager.darwinModules.home-manager
+        {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${username} = import ./home;
+            home-manager.extraSpecialArgs = specialArgs;
+        }
       ];
     };
   };
