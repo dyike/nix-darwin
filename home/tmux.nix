@@ -4,7 +4,7 @@
     shell = "/bin/zsh";
     prefix = "C-a";
     baseIndex = 1;
-    paneBaseIndex = 1;
+    # paneBaseIndex = 4;
     terminal = "screen-256color";
     keyMode = "vi";
     mouse = true;

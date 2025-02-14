@@ -2,7 +2,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      shell = {
+      terminal.shell = {
         program = "/bin/zsh";
         args = [ "-l" "-c" "tmux attach || tmux -f ~/.config/tmux/tmux.conf" ];
       };
@@ -80,32 +80,32 @@
         };
       };
 
-      hints = {
-        enabled = [
-          {
-            regex = "(https|http):[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\s{-}\\^⟨⟩`]+";
-            hyperlinks = true;
-            action = "Select";
-            command = "open";
-            post_processing = true;
-            mouse.enabled = true;
-          }
-          {
-            regex = "(file|git|ssh|ftp|ipfs|ipns|magnet|mailto):[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\s{-}\\^⟨⟩`]+";
-            hyperlinks = true;
-            action = "Select";
-            post_processing = true;
-            mouse.enabled = true;
-          }
-        ];
-      };
+      # hints = {
+      #   enabled = [
+      #     {
+      #       regex = "(https|http):[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\s{-}\\^⟨⟩`]+";
+      #       hyperlinks = true;
+      #       action = "Select";
+      #       command = "open";
+      #       post_processing = true;
+      #       mouse.enabled = true;
+      #     }
+      #     {
+      #       regex = "(file|git|ssh|ftp|ipfs|ipns|magnet|mailto):[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\s{-}\\^⟨⟩`]+";
+      #       hyperlinks = true;
+      #       action = "Select";
+      #       post_processing = true;
+      #       mouse.enabled = true;
+      #     }
+      #   ];
+      # };
 
       key_bindings = [
         { key = "I"; mods = "Control"; mode = "~Vi|~Alt"; action = "ScrollLineUp"; }
         { key = "K"; mods = "Control"; mode = "~Vi|~Alt"; action = "ScrollLineDown"; }
         { key = "J"; mods = "Control"; mode = "~Vi|~Alt"; action = "None"; }
         { key = "L"; mods = "Control"; mode = "~Vi|~Alt"; action = "None"; }
-        { key = "Back"; mods = "Alt"; chars = "\\x17"; }
+        # { key = "Back"; mods = "Alt"; chars = "\\x18"; }
 
         # Vi Mode
         { key = "Space"; mods = "Control"; action = "ToggleViMode"; }
@@ -150,7 +150,7 @@
         { key = "K"; mods = "Command"; mode = "Search"; action = "SearchHistoryNext"; }
 
         # macOS specific
-        { key = "R"; mods = "Command"; mode = "~Vi|~Alt"; chars = "\\x0c"; }
+        # { key = "R"; mods = "Command"; mode = "~Vi|~Alt"; chars = "\\x0c"; }
         { key = "R"; mods = "Command"; mode = "~Vi|~Alt"; action = "ClearHistory"; }
         { key = "Key0"; mods = "Command"; action = "ResetFontSize"; }
         { key = "Plus"; mods = "Command"; action = "IncreaseFontSize"; }
@@ -164,11 +164,11 @@
         { key = "Q"; mods = "Command"; action = "Quit"; }
         { key = "W"; mods = "Command"; action = "Quit"; }
         { key = "N"; mods = "Command"; action = "CreateNewWindow"; }
-        { key = "I"; mods = "Command"; mode = "~Vi|~Alt"; chars = "\\x1b[A"; }
-        { key = "K"; mods = "Command"; mode = "~Vi|~Alt"; chars = "\\x1b[B"; }
-        { key = "J"; mods = "Command"; mode = "~Vi|~Alt"; chars = "\\x01"; }
-        { key = "L"; mods = "Command"; mode = "~Vi|~Alt"; chars = "\\x05"; }
-        { key = "Back"; mods = "Command"; chars = "\\x15"; }
+        # { key = "I"; mods = "Command"; mode = "~Vi|~Alt"; chars = "\\x2b[A"; }
+        # { key = "K"; mods = "Command"; mode = "~Vi|~Alt"; chars = "\\x1b[B"; }
+        # { key = "J"; mods = "Command"; mode = "~Vi|~Alt"; chars = "\\x01"; }
+        # { key = "L"; mods = "Command"; mode = "~Vi|~Alt"; chars = "\\x05"; }
+        # { key = "Back"; mods = "Command"; chars = "\\x15"; }
         { key = "Return"; mods = "Command"; action = "ToggleFullscreen"; }
       ];
     };
