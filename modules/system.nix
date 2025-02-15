@@ -17,7 +17,7 @@
     defaults = {
       # clock 
       menuExtraClock.Show24Hour = true;  # show 24 hour clock
-      menuExtraClock.ShowSeconds = true;
+      # menuExtraClock.ShowSeconds = true;
 
       # https://github.com/LnL7/nix-darwin/blob/master/modules/system/defaults/trackpad.nix
       trackpad = {
