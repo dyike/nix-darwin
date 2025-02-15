@@ -1,31 +1,31 @@
-{ pkgs, ... }: {
+{ pkgs, username, ... }: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;  # 启用自动补全
-    enableAutosuggestions = true;  # 启用自动建议
-    # syntaxHighlighting.enable = true;  # 启用语法高亮
+    # 启用自动建议
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;  # 启用语法高亮
 
-    # oh-my-zsh = {
-    #   enable = true;
-    #   theme = "robbyrussell";
-    #   plugins = ["git" "sudo"];
-    # };
+    oh-my-zsh = {
+      enable = true;
+      theme = "agnoster";
+      plugins = [ "git" "sudo" "z" "history" "extract" ];
+    };
 
-    # initExtra = ''
-    #   # 自定义提示符
-    #   export PROMPT="%n@%m:%~%# "
+    initExtra = ''
+      export LC_ALL=en_US.UTF-8
 
-    #   # 别名
-    #   alias ll="ls -l"
-    #   alias la="ls -A"
-    #   alias l="ls -CF"
+      # 自定义提示符
+      export PROMPT="%n@%m:%~%# "
 
-    #   # 添加自定义路径
-    #   export PATH=$HOME/.local/bin:$PATH
-    # '';
+      # 别名
+      alias ll="ls -l"
+      alias la="ls -A"
+      alias l="ls -CF"
+    '';
   };
 
-  # 设置 Zsh 为默认 Shell
-  environment.shells = [ pkgs.zsh ];  # 将 Zsh 添加到可用 Shell 列表
-  # users.users.${username}.shell = pkgs.zsh;  # 将 `ityike` 替换为你的用户名
+  home.sessionVariables = {
+    PATH = "$HOME/.local/bin:$PATH";
+  };
 }
