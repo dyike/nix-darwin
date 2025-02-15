@@ -1,5 +1,6 @@
 { username, ... }: {
   imports = [
+    ./shell.nix
     ./core.nix
     ./git.nix
     ./alacritty.nix
