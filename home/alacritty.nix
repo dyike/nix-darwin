@@ -83,7 +83,7 @@
       hints = {
         enabled = [
           {
-            regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^u0000-u001Fu007F-u009F<>\"\\s{-}\\^⟨⟩`]+";
+            regex = ''(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^u0000-u001Fu007F-u009F<>"\\s{-}\\^⟨⟩`]+'';
             hyperlinks = true;
             action = "Select";
             command = "open";
