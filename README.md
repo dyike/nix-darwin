@@ -3,19 +3,23 @@ Nix-darwin setup for (M/Intel) Macs.
 
 ## setup
 ### 0x00 First to setup
+- Setup your hostname on your Mac.
+```
+ sudo scutil --get ComputerName | sudo tee /etc/hostname
+```
 - Install Nix, multi-user installation.
 - Install Homebrew. Not strictly nescessary, but some apps are not in nixpkgs, and nix integrates nicely with homebrew.
 Borrow nescessary parts off of the nix-darwin-kickstarter/minimal, and put it in ~/.config/nix-darwin (this repo).
 - Install nix-darwin, using nix it self, and nix flakes
 
 ```
-nix run nix-darwin -- switch --flake ~/.config/nix
+nix run nix-darwin -- switch --flake ~/.config/nix --impure
 ```
 
 ### 0x01 Build the system and switch to it
 > use root!!!
 ```
-darwin-rebuild switch --flake ~/.config/nix
+darwin-rebuild switch --flake ~/.config/nix --impure
 ```
 
 ## contents

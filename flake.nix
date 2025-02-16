@@ -40,7 +40,7 @@
     useremail = "yuanfeng634@gmail.com";
     # system = "aarch64-darwin"; # aarch64-darwin or x86_64-darwin
     system = builtins.currentSystem;
-    hostname = builtins.getEnv "HOST";
+    hostname = builtins.replaceStrings ["\n"] [""] (builtins.readFile /etc/hostname);
 
     specialArgs =
       inputs
