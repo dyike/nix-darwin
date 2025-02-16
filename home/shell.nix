@@ -1,4 +1,24 @@
-{ pkgs, username, ... }: {
+{ config, pkgs, lib, username, ... }:
+let
+  isX86 = pkgs.stdenv.isx86_64;
+in {
+  home.packages = with pkgs; [
+    asitop 
+  ] ++ lib.optionals isX86 [
+    go
+    gopls       # Go 语言服务器
+    delve       # 调试器
+    golangci-lint # 代码检查
+  ];
+
+  home.sessionVariables = lib.optionalAttrs isX86 {
+    GOPATH = "${config.home.homeDirectory}/Code/go";
+    GOBIN = "${config.home.homeDirectory}/Code/go/bin";
+    GO111MODULE = "on";
+  } // {
+    PATH = "$HOME/.local/bin:$PATH";
+  };
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;  # 启用自动补全
@@ -26,10 +46,7 @@
       alias ll="ls -l"
       alias la="ls -A"
       alias l="ls -CF"
-    '';
-  };
 
-  home.sessionVariables = {
-    PATH = "$HOME/.local/bin:$PATH";
+    '';
   };
 }
