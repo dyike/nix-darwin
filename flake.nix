@@ -36,10 +36,11 @@
     home-manager,
     ...
   }: let
-    username = "ityike";
+    username = builtins.getEnv "USER";
     useremail = "yuanfeng634@gmail.com";
-    system = "aarch64-darwin"; # aarch64-darwin or x86_64-darwin
-    hostname = "Mac-mini";
+    # system = "aarch64-darwin"; # aarch64-darwin or x86_64-darwin
+    system = builtins.currentSystem;
+    hostname = builtins.getEnv "HOST";
 
     specialArgs =
       inputs
