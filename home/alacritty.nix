@@ -1,9 +1,9 @@
-{ pkgs, ... }: {
+{ pkgs, username, ... }: {
   programs.alacritty = {
     enable = true;
     settings = {
       terminal.shell = {
-        program = "/bin/zsh";
+        program = "/etc/profiles/per-user/${username}/bin/zsh";
         args = [ "-l" "-c" "tmux attach || tmux -f ~/.config/tmux/tmux.conf" ];
       };
 

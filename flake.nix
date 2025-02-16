@@ -39,7 +39,7 @@
     username = "ityike";
     useremail = "yuanfeng634@gmail.com";
     system = "aarch64-darwin"; # aarch64-darwin or x86_64-darwin
-    hostname = "ityikes-Mac-mini";
+    hostname = "Mac-mini";
 
     specialArgs =
       inputs

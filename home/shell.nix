@@ -16,7 +16,11 @@
       export LC_ALL=en_US.UTF-8
 
       # 自定义提示符
-      export PROMPT="%n@%m:%~%# "
+      autoload -Uz vcs_info
+      precmd() { vcs_info }
+      zstyle ':vcs_info:git:*' formats '(%F{green}%b%f)'
+
+      export PROMPT='%F{blue}%n%f@%F{green}%m%f:%F{yellow}%~%f %F{cyan}$vcs_info_msg_0_%f %# '
 
       # 别名
       alias ll="ls -l"
