@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       terminal.shell = {
-        program = "/etc/profiles/per-user/${username}/bin/zsh";
+        program = "${pkgs.zsh}/bin/zsh";
         args = [ "-l" "-c" "tmux attach || tmux -f ~/.config/tmux/tmux.conf" ];
       };
 

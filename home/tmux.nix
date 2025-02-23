@@ -1,7 +1,7 @@
 { pkgs, username, ... }: {
   programs.tmux = {
     enable = true;
-    shell = "/etc/profiles/per-user/${username}/bin/zsh";
+    shell = "${pkgs.zsh}/bin/zsh";
     prefix = "C-a";
     baseIndex = 1;
     # paneBaseIndex = 4;

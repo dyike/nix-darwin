@@ -39,7 +39,7 @@
     # otherwise Apple Store will refuse to install them.
     # For details, see https://github.com/mas-cli/mas 
     masApps = {
-      Xcode = 497799835;
+      # Xcode = 497799835;
       # Wechat = 836500024;
       # NeteaseCloudMusic = 944848654;
       # QQ = 451108668;
