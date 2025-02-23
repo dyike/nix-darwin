@@ -1,10 +1,10 @@
 { username, ... }: {
   imports = [
-    ./shell.nix
     ./core.nix
+    ./shell.nix
     ./git.nix
-    ./alacritty.nix
     ./tmux.nix
+    ./alacritty.nix
   ];
 
   # Home Manager needs a bit of information about you and the
