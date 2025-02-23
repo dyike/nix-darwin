@@ -6,8 +6,7 @@ in {
     asitop 
     nodejs_20
     yarn
-    # nodePackages.vite
-    # nodePackages.pnpm
+    nodePackages.pnpm
   ] ++ lib.optionals isX86 [
     go
     gopls       # Go 语言服务器
