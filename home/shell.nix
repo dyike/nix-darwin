@@ -7,22 +7,38 @@ in {
     nodejs_20
     yarn
     nodePackages.pnpm
-  ] ++ lib.optionals isX86 [
     go
     gopls       # Go 语言服务器
     delve       # 调试器
     golangci-lint # 代码检查
+  ] ++ lib.optionals isX86 [
+    # go
+    # gopls       # Go 语言服务器
+    # delve       # 调试器
+    # golangci-lint # 代码检查
   ];
 
-  home.sessionVariables = lib.optionalAttrs isX86 {
+  home.sessionVariables = {
     GOPATH = "${config.home.homeDirectory}/Code/go";
     GOBIN = "${config.home.homeDirectory}/Code/go/bin";
     GO111MODULE = "on";
-  } // {
     # 合并多个路径到 PATH
     PATH = "$HOME/.local/bin:$HOME/.npm-global/bin:$PATH";
     NPM_CONFIG_PREFIX = "$HOME/.npm-global";
   };
+
+  # home.sessionVariables = lib.optionalAttrs isX86 {
+  #   # GOPATH = "${config.home.homeDirectory}/Code/go";
+  #   # GOBIN = "${config.home.homeDirectory}/Code/go/bin";
+  #   # GO111MODULE = "on";
+  # } // {
+  #   GOPATH = "${config.home.homeDirectory}/Code/go";
+  #   GOBIN = "${config.home.homeDirectory}/Code/go/bin";
+  #   GO111MODULE = "on";
+  #   # 合并多个路径到 PATH
+  #   PATH = "$HOME/.local/bin:$HOME/.npm-global/bin:$PATH";
+  #   NPM_CONFIG_PREFIX = "$HOME/.npm-global";
+  # };
 
   home.activation.setupNpmDirs = ''
     mkdir -p $HOME/.npm-global/{lib,bin}
