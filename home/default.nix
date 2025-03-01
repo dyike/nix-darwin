@@ -1,6 +1,7 @@
 { username, ... }: {
   imports = [
     ./core.nix
+    ./nvim.nix
     ./shell.nix
     ./git.nix
     ./tmux.nix

@@ -9,12 +9,4 @@
     fzf # A command-line fuzzy finder 
     tree
 ];
-  programs = {
-    # modern vim
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      vimAlias = true;
-    };
-  };
 }
