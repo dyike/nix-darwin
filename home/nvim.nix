@@ -10,7 +10,7 @@
   xdg.configFile."nvim" = {
     source = builtins.fetchGit {
       url = "https://github.com/dyike/nvimrc.git";
-      ref = "main";
+    #   ref = "master";
     };
     recursive = true;
   };
