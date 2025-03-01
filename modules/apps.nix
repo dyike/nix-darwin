@@ -62,8 +62,8 @@
     # `brew install --cask`
     # TODO Feel free to add your favorite apps here.
     casks = [
-      "google-chrome"
-      "raycast"
+      # "google-chrome"
+      # "raycast"
     ];
   };
 }
