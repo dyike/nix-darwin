@@ -8,17 +8,16 @@ in {
     yarn
     nodePackages.pnpm
     go
-    gopls       # Go 语言服务器
-    delve       # 调试器
-    golangci-lint # 代码检查
+    gopls       # Go language server
+    delve       # Debugger
+    golangci-lint # Code checker
   ] ++ lib.optionals isX86 [
-    # go
-    # gopls       # Go 语言服务器
-    # delve       # 调试器
-    # golangci-lint # 代码检查
+    # Additional x86-specific packages if needed
   ];
 
+  # Use Home Manager's proper way to set environment variables
   home.sessionVariables = {
+    SHELL = "${pkgs.zsh}/bin/zsh";
     GOPATH = "${config.home.homeDirectory}/Code/go";
     GOBIN = "${config.home.homeDirectory}/Code/go/bin";
     GO111MODULE = "on";
@@ -46,10 +45,18 @@ in {
 
   programs.zsh = {
     enable = true;
-    enableCompletion = true;  # 启用自动补全
-    # 启用自动建议
+    enableCompletion = true;
     autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;  # 启用语法高亮
+    syntaxHighlighting.enable = true;
+
+    history = {
+      size = 10000;
+      save = 10000;
+      path = "$HOME/.zsh_history";
+      ignoreDups = true;
+      share = true;
+      expireDuplicatesFirst = true;
+    };
 
     oh-my-zsh = {
       enable = true;
@@ -58,31 +65,20 @@ in {
     };
 
     initExtra = ''
-      export LANG=en_US.UTF-8
-      export LC_CTYPE=en_US.UTF-8
-      export LC_ALL=en_US.UTF-8
-
-      # 自定义提示符
+      # Custom prompt
       autoload -Uz vcs_info
       precmd() { vcs_info }
       zstyle ':vcs_info:git:*' formats '(%F{green}%b%f%F{red}%u%c%f)'
       zstyle ':vcs_info:git:*' actionformats '(%F{green}%b%f|%F{red}%a%f%F{red}%u%c%f)'
-      zstyle ':vcs_info:git:*' check-for-changes true
-      zstyle ':vcs_info:git:*' unstagedstr '*'
-      zstyle ':vcs_info:git:*' stagedstr '+'
-
-      # 第一行：显示用户、主机、路径和 Git 分支
+      
       PROMPT='%F{blue}%n%f@%F{green}%m%f:%F{yellow}%~%f %F{cyan}$vcs_info_msg_0_%f'$'\n'
-      # 第二行：输入命令的提示符
       PROMPT+='%F{magenta}➜%f '
-      # 右侧提示符：显示时间
       RPROMPT='%F{white}%*%f'
 
-      # 别名
+      # Aliases
       alias ll="ls -l"
       alias la="ls -A"
       alias l="ls -CF"
-
     '';
   };
 }

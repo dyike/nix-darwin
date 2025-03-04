@@ -3,8 +3,8 @@
     enable = true;
     settings = {
       terminal.shell = {
-        program = "/etc/profiles/per-user/${username}/bin/zsh";
-        args = [ "-l" "-c" "tmux attach || tmux -f ~/.config/tmux/tmux.conf" ];
+        program = "${pkgs.tmux}/bin/tmux";
+        args = ["new-session"  "-A"  "-D" "-s" "main"];
       };
 
       window = {
