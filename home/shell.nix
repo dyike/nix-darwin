@@ -4,6 +4,7 @@ let
 in {
   home.packages = with pkgs; [
     asitop 
+    iperf3
     nodejs_20
     yarn
     nodePackages.pnpm
