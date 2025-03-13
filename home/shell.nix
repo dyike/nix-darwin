@@ -16,30 +16,6 @@ in {
     # Additional x86-specific packages if needed
   ];
 
-  # Use Home Manager's proper way to set environment variables
-  home.sessionVariables = {
-    SHELL = "/etc/profiles/per-user/${username}/bin/zsh";
-    GOPATH = "${config.home.homeDirectory}/Code/go";
-    GOBIN = "${config.home.homeDirectory}/Code/go/bin";
-    GO111MODULE = "on";
-    # 合并多个路径到 PATH，只添加必要的路径，尊重系统路径
-    PATH = "/etc/profiles/per-user/${username}/bin:$HOME/.local/bin:$HOME/.npm-global/bin:$PATH";
-    NPM_CONFIG_PREFIX = "$HOME/.npm-global";
-  };
-
-  # home.sessionVariables = lib.optionalAttrs isX86 {
-  #   # GOPATH = "${config.home.homeDirectory}/Code/go";
-  #   # GOBIN = "${config.home.homeDirectory}/Code/go/bin";
-  #   # GO111MODULE = "on";
-  # } // {
-  #   GOPATH = "${config.home.homeDirectory}/Code/go";
-  #   GOBIN = "${config.home.homeDirectory}/Code/go/bin";
-  #   GO111MODULE = "on";
-  #   # 合并多个路径到 PATH
-  #   PATH = "$HOME/.local/bin:$HOME/.npm-global/bin:$PATH";
-  #   NPM_CONFIG_PREFIX = "$HOME/.npm-global";
-  # };
-
   home.activation.setupNpmDirs = ''
     mkdir -p $HOME/.npm-global/{lib,bin}
   '';
@@ -80,16 +56,32 @@ in {
       alias ll="ls -l"
       alias la="ls -A"
       alias l="ls -CF"
-
-      # 确保tmux在所有tab中使用一致的shell
-      if [ "$TMUX" != "" ]; then
-        export PATH="/etc/profiles/per-user/${username}/bin:$PATH"
-      fi
     '';
 
     envExtra = ''
-      # 确保zsh路径一致性
-      export PATH="/etc/profiles/per-user/${username}/bin:$PATH"
+      export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:$PATH"
+      export NPM_CONFIG_PREFIX="$HOME/.npm-global"
+      export SHELL="/etc/profiles/per-user/${username}/bin/zsh"
+      export GOPATH="${config.home.homeDirectory}/Code/go"
+      export GOBIN="${config.home.homeDirectory}/Code/go/bin"
+      export GO111MODULE="on"
+      
+      # Comprehensive PATH configuration
+      export PATH="/etc/profiles/per-user/${username}/bin:$HOME/.local/bin:$HOME/Code/go/bin:$HOME/.npm-global/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.nix-profile/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:$PATH"
     '';
   };
+
+  # 注释掉了旧的配置
+  # home.sessionVariables = lib.optionalAttrs isX86 {
+  #   # GOPATH = "${config.home.homeDirectory}/Code/go";
+  #   # GOBIN = "${config.home.homeDirectory}/Code/go/bin";
+  #   # GO111MODULE = "on";
+  # } // {
+  #   GOPATH = "${config.home.homeDirectory}/Code/go";
+  #   GOBIN = "${config.home.homeDirectory}/Code/go/bin";
+  #   GO111MODULE = "on";
+  #   # 合并多个路径到 PATH
+  #   PATH = "$HOME/.local/bin:$HOME/.npm-global/bin:$PATH";
+  #   NPM_CONFIG_PREFIX = "$HOME/.npm-global";
+  # };
 }

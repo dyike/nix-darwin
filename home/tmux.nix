@@ -12,8 +12,11 @@
     disableConfirmationPrompt = true;
     escapeTime = 0;
     extraConfig = ''
-      # 使用login shell确保完整环境变量加载
-      set -g default-command "/etc/profiles/per-user/${username}/bin/zsh -l"
+      # 使用login shell并加载tmux环境配置
+      set -g default-command "/etc/profiles/per-user/${username}/bin/zsh -c 'test -f ~/.config/tmux/tmux-env.sh && source ~/.config/tmux/tmux-env.sh; exec /etc/profiles/per-user/${username}/bin/zsh -l'"
+      
+      # 新窗口和面板分割时加载环境配置
+      bind c new-window -c "#{pane_current_path}" "/etc/profiles/per-user/${username}/bin/zsh -c 'test -f ~/.config/tmux/tmux-env.sh && source ~/.config/tmux/tmux-env.sh; exec /etc/profiles/per-user/${username}/bin/zsh -l'"
       
       # 配置重载快捷键
       bind-key r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded"
@@ -22,8 +25,8 @@
       bind-key M split-window -h "nvim ~/.config/tmux/tmux.conf"
 
       # 分割面板配置
-      bind | split-window -h -c "#{pane_current_path}"
-      bind - split-window -v -c "#{pane_current_path}"
+      bind | split-window -h -c "#{pane_current_path}" "/etc/profiles/per-user/${username}/bin/zsh -c 'test -f ~/.config/tmux/tmux-env.sh && source ~/.config/tmux/tmux-env.sh; exec /etc/profiles/per-user/${username}/bin/zsh -l'"
+      bind - split-window -v -c "#{pane_current_path}" "/etc/profiles/per-user/${username}/bin/zsh -c 'test -f ~/.config/tmux/tmux-env.sh && source ~/.config/tmux/tmux-env.sh; exec /etc/profiles/per-user/${username}/bin/zsh -l'"
       unbind '"'
       unbind %
 
