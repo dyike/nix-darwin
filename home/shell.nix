@@ -42,13 +42,55 @@ in {
     };
 
     initExtra = ''
-      # Custom prompt
+      # Custom prompt with enhanced Git status
       autoload -Uz vcs_info
-      precmd() { vcs_info }
-      zstyle ':vcs_info:git:*' formats '(%F{green}%b%f%F{red}%u%c%f)'
-      zstyle ':vcs_info:git:*' actionformats '(%F{green}%b%f|%F{red}%a%f%F{red}%u%c%f)'
+      zstyle ':vcs_info:*' enable git
+      zstyle ':vcs_info:*' check-for-changes true
+      zstyle ':vcs_info:*' unstagedstr '!'
+      zstyle ':vcs_info:*' stagedstr '+'
+      zstyle ':vcs_info:git:*' formats ' %F{cyan}(%F{green}%b%f%F{yellow}%u%c%f%F{cyan})%f'
+      zstyle ':vcs_info:git:*' actionformats ' %F{cyan}(%F{green}%b%f|%F{red}%a%f%F{yellow}%u%c%f%F{cyan})%f'
       
-      PROMPT='%F{blue}%n%f@%F{green}%m%f:%F{yellow}%~%f %F{cyan}$vcs_info_msg_0_%f'$'\n'
+      # Add git status symbols
+      function git_prompt_status() {
+        local symbols=""
+        local git_status=$(git status --porcelain 2>/dev/null)
+        
+        # Untracked files
+        if echo "$git_status" | grep -q '?? '; then
+          symbols+="%F{red}?%f"
+        fi
+        
+        # Stashed changes
+        if git rev-parse --verify refs/stash &>/dev/null; then
+          symbols+="%F{yellow}$%f"
+        fi
+        
+        # Ahead/behind remote
+        local ahead_behind=$(git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)
+        if [[ -n "$ahead_behind" ]]; then
+          local ahead=$(echo "$ahead_behind" | awk '{print $2}')
+          local behind=$(echo "$ahead_behind" | awk '{print $1}')
+          
+          if [[ $ahead -gt 0 && $behind -gt 0 ]]; then
+            symbols+="%F{magenta}⇕%f"
+          elif [[ $ahead -gt 0 ]]; then
+            symbols+="%F{green}↑%f"
+          elif [[ $behind -gt 0 ]]; then
+            symbols+="%F{red}↓%f"
+          fi
+        fi
+        
+        echo "$symbols"
+      }
+      
+      precmd() { 
+        vcs_info 
+      }
+      
+      # Define the prompt
+      setopt PROMPT_SUBST
+      PROMPT='%F{blue}%n%f@%F{green}%m%f:%F{yellow}%~%f$vcs_info_msg_0_$(git_prompt_status)'$'\n'
       PROMPT+='%F{magenta}➜%f '
       RPROMPT='%F{white}%*%f'
 
