@@ -1,7 +1,7 @@
 { pkgs, username, ... }: {
   programs.tmux = {
     enable = true;
-    shell = "${pkgs.zsh}/bin/zsh";
+    shell = "/etc/profiles/per-user/${username}/bin/zsh";
     prefix = "C-a";
     baseIndex = 1;
     # paneBaseIndex = 4;
@@ -12,10 +12,9 @@
     disableConfirmationPrompt = true;
     escapeTime = 0;
     extraConfig = ''
-      # 解除默认前缀绑定
-      unbind C-b
-      bind-key C-a send-prefix
-
+      # 使用login shell确保完整环境变量加载
+      set -g default-command "/etc/profiles/per-user/${username}/bin/zsh -l"
+      
       # 配置重载快捷键
       bind-key r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded"
 

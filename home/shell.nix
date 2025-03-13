@@ -18,12 +18,12 @@ in {
 
   # Use Home Manager's proper way to set environment variables
   home.sessionVariables = {
-    SHELL = "${pkgs.zsh}/bin/zsh";
+    SHELL = "/etc/profiles/per-user/${username}/bin/zsh";
     GOPATH = "${config.home.homeDirectory}/Code/go";
     GOBIN = "${config.home.homeDirectory}/Code/go/bin";
     GO111MODULE = "on";
-    # 合并多个路径到 PATH
-    PATH = "$HOME/.local/bin:$HOME/.npm-global/bin:$PATH";
+    # 合并多个路径到 PATH，只添加必要的路径，尊重系统路径
+    PATH = "/etc/profiles/per-user/${username}/bin:$HOME/.local/bin:$HOME/.npm-global/bin:$PATH";
     NPM_CONFIG_PREFIX = "$HOME/.npm-global";
   };
 
@@ -80,6 +80,16 @@ in {
       alias ll="ls -l"
       alias la="ls -A"
       alias l="ls -CF"
+
+      # 确保tmux在所有tab中使用一致的shell
+      if [ "$TMUX" != "" ]; then
+        export PATH="/etc/profiles/per-user/${username}/bin:$PATH"
+      fi
+    '';
+
+    envExtra = ''
+      # 确保zsh路径一致性
+      export PATH="/etc/profiles/per-user/${username}/bin:$PATH"
     '';
   };
 }
