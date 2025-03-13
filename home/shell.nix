@@ -66,6 +66,10 @@ in {
       export GOBIN="${config.home.homeDirectory}/Code/go/bin"
       export GO111MODULE="on"
       
+      # Ensure Git uses English
+      export LANG=en_US.UTF-8
+      export LC_ALL=en_US.UTF-8
+      
       # Comprehensive PATH configuration
       export PATH="/etc/profiles/per-user/${username}/bin:$HOME/.local/bin:$HOME/Code/go/bin:$HOME/.npm-global/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.nix-profile/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:$PATH"
     '';

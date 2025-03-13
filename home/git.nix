@@ -25,7 +25,17 @@
     extraConfig = {
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
-      pull.rebase = true;
+      pull.rebase = false;
+      core = {
+        quotepath = false;
+      };
+      i18n = {
+        commitEncoding = "utf-8";
+        logOutputEncoding = "utf-8";
+      };
+      gui = {
+        encoding = "utf-8";
+      };
     };
 
     # signing = {
