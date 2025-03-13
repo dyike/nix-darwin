@@ -36,16 +36,6 @@
       gui = {
         encoding = "utf-8";
       };
-      # url = {
-      #   "https://github.com/".insteadOf = [
-      #     "git@github.com:"
-      #     "ssh://git@github.com/"
-      #   ];
-      #   "https://gitlab.com/".insteadOf = [
-      #     "git@gitlab.com:"
-      #     "ssh://git@gitlab.com/"
-      #   ];
-      # };
     };
 
     # signing = {
