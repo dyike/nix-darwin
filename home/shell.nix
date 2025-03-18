@@ -94,6 +94,8 @@ in {
       PROMPT+='%F{magenta}➜%f '
       RPROMPT='%F{white}%*%f'
 
+      bindkey -s '^R' 'clear\n'
+
       # Aliases
       alias ll="ls -l"
       alias la="ls -A"
