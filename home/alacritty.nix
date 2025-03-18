@@ -27,19 +27,20 @@
 
       font = {
         normal = {
-          family = "Monaco";
+          family = "Maple Mono";
           style = "Regular";
         };
         bold = {
-          family = "Monaco";
+          family = "Maple Mono";
           style = "Bold";
         };
         italic = {
-          family = "Monaco";
+          family = "Maple Mono";
           style = "Italic";
+
         };
         bold_italic = {
-          family = "Monaco";
+          family = "Maple Mono";
           style = "Bold Italic";
         };
         size = 20.0;
