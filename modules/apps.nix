@@ -17,6 +17,8 @@
     jq
     wget
     curl
+    scrcpy
+    android-tools
   ];
 
   environment.variables.EDITOR = "nvim";
