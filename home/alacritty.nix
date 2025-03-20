@@ -37,13 +37,12 @@
         italic = {
           family = "Maple Mono";
           style = "Italic";
-
         };
         bold_italic = {
           family = "Maple Mono";
           style = "Bold Italic";
         };
-        size = 20.0;
+        size = 22.0;
         offset = {
           x = 1;
           y = 10;

@@ -94,6 +94,8 @@ in {
       PROMPT+='%F{magenta}➜%f '
       RPROMPT='%F{white}%*%f'
 
+      bindkey -s '^R' 'clear\n'
+
       # Aliases
       alias ll="ls -l"
       alias la="ls -A"
@@ -113,7 +115,7 @@ in {
       export LC_ALL=en_US.UTF-8
       
       # Comprehensive PATH configuration
-      export PATH="/etc/profiles/per-user/${username}/bin:$HOME/.local/bin:$HOME/Code/go/bin:$HOME/.npm-global/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.nix-profile/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:$PATH"
+      export PATH="/etc/profiles/per-user/${username}/bin:$HOME/.local/bin:$HOME/Code/go/bin:$HOME/.npm-global/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.nix-profile/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
     '';
   };
 
