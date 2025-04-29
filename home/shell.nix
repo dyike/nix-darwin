@@ -12,6 +12,9 @@ in {
     gopls       # Go language server
     delve       # Debugger
     golangci-lint # Code checker
+    rustup        # Rust toolchain installer
+    rustc         # Rust compiler
+    cargo         # Rust package manager
   ] ++ lib.optionals isX86 [
     # Additional x86-specific packages if needed
   ];
