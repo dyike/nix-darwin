@@ -6,9 +6,9 @@ in {
   home.packages = with pkgs; [
     asitop 
     iperf3
-    nodejs_20
-    yarn
-    # nodePackages.pnpm
+    unstable.nodejs
+    unstable.yarn
+    unstable.nodePackages.pnpm
     go
     gopls       # Go language server
     delve       # Debugger
