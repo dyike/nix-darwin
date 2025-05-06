@@ -1,20 +1,19 @@
 { config, pkgs, lib, username, ... }:
 let
   isX86 = pkgs.stdenv.isx86_64;
+  unstable = import (fetchTarball https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz) { };
 in {
   home.packages = with pkgs; [
     asitop 
     iperf3
-    # nodejs_20
+    nodejs_20
     yarn
     # nodePackages.pnpm
     go
     gopls       # Go language server
     delve       # Debugger
     golangci-lint # Code checker
-    rustup        # Rust toolchain installer
-    rustc         # Rust compiler
-    cargo         # Rust package manager
+    unstable.rustup        # Rust toolchain installer
   ] ++ lib.optionals isX86 [
     # Additional x86-specific packages if needed
   ];
