@@ -5,9 +5,9 @@ in {
   home.packages = with pkgs; [
     asitop 
     iperf3
-    nodejs_20
+    # nodejs_20
     yarn
-    nodePackages.pnpm
+    # nodePackages.pnpm
     go
     gopls       # Go language server
     delve       # Debugger
@@ -100,36 +100,21 @@ in {
       alias ll="ls -l"
       alias la="ls -A"
       alias l="ls -CF"
+      # Go 环境别名，使原始的 go 命令使用我们的环境选择脚本
+      alias go="goenv"
     '';
 
     envExtra = ''
       export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:$PATH"
       export NPM_CONFIG_PREFIX="$HOME/.npm-global"
       export SHELL="/etc/profiles/per-user/${username}/bin/zsh"
-      export GOPATH="${config.home.homeDirectory}/Code/go"
-      export GOBIN="${config.home.homeDirectory}/Code/go/bin"
-      export GO111MODULE="on"
       
       # Ensure Git uses English
       export LANG=en_US.UTF-8
       export LC_ALL=en_US.UTF-8
       
       # Comprehensive PATH configuration
-      export PATH="/etc/profiles/per-user/${username}/bin:$HOME/.local/bin:$HOME/Code/go/bin:$HOME/.npm-global/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.nix-profile/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+      export PATH="/etc/profiles/per-user/${username}/bin:$HOME/.local/bin:$HOME/.npm-global/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.nix-profile/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
     '';
   };
-
-  # 注释掉了旧的配置
-  # home.sessionVariables = lib.optionalAttrs isX86 {
-  #   # GOPATH = "${config.home.homeDirectory}/Code/go";
-  #   # GOBIN = "${config.home.homeDirectory}/Code/go/bin";
-  #   # GO111MODULE = "on";
-  # } // {
-  #   GOPATH = "${config.home.homeDirectory}/Code/go";
-  #   GOBIN = "${config.home.homeDirectory}/Code/go/bin";
-  #   GO111MODULE = "on";
-  #   # 合并多个路径到 PATH
-  #   PATH = "$HOME/.local/bin:$HOME/.npm-global/bin:$PATH";
-  #   NPM_CONFIG_PREFIX = "$HOME/.npm-global";
-  # };
 }
