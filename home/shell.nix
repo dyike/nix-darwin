@@ -9,6 +9,8 @@ in {
     unstable.nodejs
     unstable.yarn
     unstable.nodePackages.pnpm
+    unstable.python311
+    unstable.python311Packages.uv
     go
     gopls       # Go language server
     delve       # Debugger
