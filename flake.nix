@@ -36,7 +36,11 @@
     home-manager,
     ...
   }: let
-    username = builtins.getEnv "USER";
+    # Use SUDO_USER if available (when running with sudo), otherwise fall back to USER
+    username = 
+      if builtins.getEnv "SUDO_USER" != "" 
+      then builtins.getEnv "SUDO_USER" 
+      else builtins.getEnv "USER";
     useremail = "yuanfeng634@gmail.com";
     # system = "aarch64-darwin"; # aarch64-darwin or x86_64-darwin
     system = builtins.currentSystem;

@@ -1,6 +1,9 @@
-{ pkgs, username, ... }:
+{ pkgs, lib, username, ... }:
 
 {
+  # Fix root user home directory assertion with force override
+  users.users.root.home = lib.mkForce "/var/root";
+
   system = {
     stateVersion = 5;
 

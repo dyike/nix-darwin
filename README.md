@@ -19,7 +19,7 @@ nix run nix-darwin -- switch --flake ~/.config/nix --impure
 ### 0x01 Build the system and switch to it
 > use root!!!
 ```
-darwin-rebuild switch --flake ~/.config/nix --impure
+sudo darwin-rebuild switch --flake ~/.config/nix --impure
 ```
 
 ## contents
