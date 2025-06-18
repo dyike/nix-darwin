@@ -45,7 +45,7 @@ in {
       plugins = [ "git" "sudo" "z" "history" "extract" ];
     };
 
-    initExtra = ''
+    initContent = ''
       # Custom prompt with enhanced Git status
       autoload -Uz vcs_info
       zstyle ':vcs_info:*' enable git
