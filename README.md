@@ -22,6 +22,18 @@ nix run nix-darwin -- switch --flake ~/.config/nix --impure
 sudo darwin-rebuild switch --flake ~/.config/nix --impure
 ```
 
+### 0x02 Keep nixpkgs-unstable packages fresh
+- Some developer tools (e.g. Go) are provided from `nixpkgs-unstable` via the `unstablePkgs` flake input, mirrored from USTC to avoid GitHub rate limits.
+- Update them by refreshing the lock file entry when needed:
+```
+nix flake update nixpkgs-unstable
+```
+- Inspect and commit the resulting `flake.lock` diff, then rebuild:
+```
+sudo darwin-rebuild switch --flake ~/.config/nix-darwin --impure
+```
+- If `sudo` drops your hostname environment variables, pass `DARWIN_HOSTNAME` explicitly when rebuilding.
+
 ## contents
 - flake.nix
     - main entrypoint

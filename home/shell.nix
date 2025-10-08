@@ -1,21 +1,21 @@
-{ config, pkgs, lib, username, ... }:
+{ config, pkgs, lib, username, unstablePkgs, ... }:
 let
   isX86 = pkgs.stdenv.isx86_64;
-  unstable = import (fetchTarball https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz) { };
 in {
   home.packages = with pkgs; [
-    asitop 
+    asitop
     iperf3
-    unstable.nodejs
-    unstable.yarn
-    unstable.nodePackages.pnpm
-    unstable.python311
-    unstable.python311Packages.uv
-    go
-    gopls       # Go language server
-    delve       # Debugger
-    golangci-lint # Code checker
-    unstable.rustup        # Rust toolchain installer
+  ] ++ [
+    unstablePkgs.nodejs
+    unstablePkgs.yarn
+    unstablePkgs.nodePackages.pnpm
+    unstablePkgs.python311
+    unstablePkgs.python311Packages.uv
+    unstablePkgs.go
+    unstablePkgs.gopls       # Go language server
+    unstablePkgs.delve       # Debugger
+    unstablePkgs.golangci-lint # Code checker
+    unstablePkgs.rustup        # Rust toolchain installer
   ] ++ lib.optionals isX86 [
     # Additional x86-specific packages if needed
   ];
@@ -54,28 +54,28 @@ in {
       zstyle ':vcs_info:*' stagedstr '+'
       zstyle ':vcs_info:git:*' formats ' %F{cyan}(%F{green}%b%f%F{yellow}%u%c%f%F{cyan})%f'
       zstyle ':vcs_info:git:*' actionformats ' %F{cyan}(%F{green}%b%f|%F{red}%a%f%F{yellow}%u%c%f%F{cyan})%f'
-      
+
       # Add git status symbols
       function git_prompt_status() {
         local symbols=""
         local git_status=$(git status --porcelain 2>/dev/null)
-        
+
         # Untracked files
         if echo "$git_status" | grep -q '?? '; then
           symbols+="%F{red}?%f"
         fi
-        
+
         # Stashed changes
         if git rev-parse --verify refs/stash &>/dev/null; then
           symbols+="%F{yellow}$%f"
         fi
-        
+
         # Ahead/behind remote
         local ahead_behind=$(git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)
         if [[ -n "$ahead_behind" ]]; then
           local ahead=$(echo "$ahead_behind" | awk '{print $2}')
           local behind=$(echo "$ahead_behind" | awk '{print $1}')
-          
+
           if [[ $ahead -gt 0 && $behind -gt 0 ]]; then
             symbols+="%F{magenta}⇕%f"
           elif [[ $ahead -gt 0 ]]; then
@@ -84,14 +84,14 @@ in {
             symbols+="%F{red}↓%f"
           fi
         fi
-        
+
         echo "$symbols"
       }
-      
-      precmd() { 
-        vcs_info 
+
+      precmd() {
+        vcs_info
       }
-      
+
       # Define the prompt
       setopt PROMPT_SUBST
       PROMPT='%F{blue}%n%f@%F{green}%m%f:%F{yellow}%~%f$vcs_info_msg_0_$(git_prompt_status)'$'\n'
@@ -112,11 +112,11 @@ in {
       export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:$PATH"
       export NPM_CONFIG_PREFIX="$HOME/.npm-global"
       export SHELL="/etc/profiles/per-user/${username}/bin/zsh"
-      
+
       # Ensure Git uses English
       export LANG=en_US.UTF-8
       export LC_ALL=en_US.UTF-8
-      
+
       # Comprehensive PATH configuration
       export PATH="/etc/profiles/per-user/${username}/bin:$HOME/.local/bin:$HOME/.npm-global/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.nix-profile/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
     '';

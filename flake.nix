@@ -11,6 +11,7 @@
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
+    nixpkgs-unstable.url = "git+https://mirrors.ustc.edu.cn/github.com/nixos/nixpkgs.git?ref=nixpkgs-unstable";
     nix-darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,6 +31,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     nix-darwin,
     home-manager,
     ...
@@ -40,14 +42,16 @@
       then builtins.getEnv "SUDO_USER"
       else builtins.getEnv "USER";
     useremail = "yuanfeng634@gmail.com";
+
     # system = "aarch64-darwin"; # aarch64-darwin or x86_64-darwin
     system = builtins.currentSystem;
     hostname = builtins.replaceStrings ["\n"] [""] (builtins.readFile /etc/hostname);
 
+    unstablePkgs = import nixpkgs-unstable { inherit system; };
     specialArgs =
       inputs
       // {
-        inherit username useremail hostname;
+        inherit username useremail hostname unstablePkgs;
       };
   in {
     darwinConfigurations."${hostname}" = nix-darwin.lib.darwinSystem {
