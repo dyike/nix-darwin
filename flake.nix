@@ -11,7 +11,7 @@
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
-    nixpkgs-unstable.url = "git+https://mirrors.ustc.edu.cn/github.com/nixos/nixpkgs.git?ref=nixpkgs-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
