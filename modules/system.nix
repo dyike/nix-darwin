@@ -30,7 +30,7 @@
 
       # customize dock
       dock = {
-        autohide = true;
+        autohide = false;
         show-recents = false;  # disable recent apps
         tilesize = 32;
         largesize = 96;
