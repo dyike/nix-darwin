@@ -2,8 +2,6 @@
   description = "Nix for macOS configuration";
   nixConfig = {
     substituters = [
-      # Query the mirror of USTC first, and then the official cache.
-      "https://mirrors.ustc.edu.cn/nix-channels/store"
       "https://cache.nixos.org"
     ];
   };
@@ -37,9 +35,9 @@
     ...
   }: let
     # Use SUDO_USER if available (when running with sudo), otherwise fall back to USER
-    username = 
-      if builtins.getEnv "SUDO_USER" != "" 
-      then builtins.getEnv "SUDO_USER" 
+    username =
+      if builtins.getEnv "SUDO_USER" != ""
+      then builtins.getEnv "SUDO_USER"
       else builtins.getEnv "USER";
     useremail = "yuanfeng634@gmail.com";
     # system = "aarch64-darwin"; # aarch64-darwin or x86_64-darwin
