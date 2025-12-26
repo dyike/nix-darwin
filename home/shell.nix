@@ -113,7 +113,7 @@ in {
     '';
 
     envExtra = ''
-      export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:$PATH"
+      export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$PATH"
       export NPM_CONFIG_PREFIX="$HOME/.npm-global"
       export SHELL="/etc/profiles/per-user/${username}/bin/zsh"
 
@@ -122,7 +122,7 @@ in {
       export LC_ALL=en_US.UTF-8
 
       # Comprehensive PATH configuration
-      export PATH="/etc/profiles/per-user/${username}/bin:$HOME/.local/bin:$HOME/.npm-global/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.nix-profile/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+      export PATH="/etc/profiles/per-user/${username}/bin:$HOME/.local/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.nix-profile/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
     '';
   };
 }

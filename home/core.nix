@@ -8,6 +8,7 @@
     ripgrep
     fzf # A command-line fuzzy finder 
     tree
+    cmake
   ];
 
   # This is the key part that fixes your issue
