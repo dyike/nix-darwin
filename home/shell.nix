@@ -5,20 +5,16 @@ in {
   home.packages = with pkgs; [
     asitop
     iperf3
-    go
-    gopls
-    delve
-    golangci-lint
   ] ++ [
     unstablePkgs.nodejs
     unstablePkgs.yarn
     unstablePkgs.nodePackages.pnpm
     unstablePkgs.python311
     unstablePkgs.python311Packages.uv
-    # unstablePkgs.go
-    # unstablePkgs.gopls       # Go language server
-    # unstablePkgs.delve       # Debugger
-    # unstablePkgs.golangci-lint # Code checker
+    unstablePkgs.go
+    unstablePkgs.gopls
+    unstablePkgs.delve
+    unstablePkgs.golangci-lint
     unstablePkgs.rustup        # Rust toolchain installer
   ] ++ lib.optionals isX86 [
     # Additional x86-specific packages if needed

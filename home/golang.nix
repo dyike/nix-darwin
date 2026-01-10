@@ -21,7 +21,7 @@ let
     
     # 如果有参数，则执行 go 命令
     if [ $# -gt 0 ]; then
-      exec ${pkgs.go}/bin/go "$@"
+      exec ${unstablePkgs.go}/bin/go "$@"
     else
       # 否则打开一个新的 shell
       exec $SHELL
@@ -45,7 +45,7 @@ let
     
     # 如果有参数，则执行 go 命令
     if [ $# -gt 0 ]; then
-      exec ${pkgs.go}/bin/go "$@"
+      exec ${unstablePkgs.go}/bin/go "$@"
     else
       # 否则打开一个新的 shell
       exec $SHELL
