@@ -11,6 +11,7 @@ in {
     unstablePkgs.nodePackages.pnpm
     unstablePkgs.python311
     unstablePkgs.python311Packages.uv
+    unstablePkgs.python311Packages.pip
     unstablePkgs.go
     unstablePkgs.gopls
     unstablePkgs.delve
