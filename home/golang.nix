@@ -79,6 +79,14 @@ in {
     switchGoEnvByDir
     goenvScript
   ];
+
+  # 设置默认 Go 环境变量，确保非交互式进程（如 agent）不会回退到 ~/go
+  home.sessionVariables = {
+    GOPATH = "$HOME/Code/go";
+    GOBIN = "$HOME/Code/go/bin";
+    GOMODCACHE = "$HOME/Code/go/pkg/mod";
+    GO111MODULE = "on";
+  };
   
   home.file.".go-work-dirs".text = ''
     # 这个文件存储了 Go 工作环境的基本目录
