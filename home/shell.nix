@@ -10,9 +10,9 @@ in {
     unstablePkgs.yarn
     unstablePkgs.nodePackages.pnpm
     unstablePkgs.bun
-    unstablePkgs.python311
-    unstablePkgs.python311Packages.uv
-    unstablePkgs.python311Packages.pip
+    unstablePkgs.python312
+    unstablePkgs.python312Packages.uv
+    unstablePkgs.python312Packages.pip
     unstablePkgs.go
     unstablePkgs.gopls
     unstablePkgs.delve
