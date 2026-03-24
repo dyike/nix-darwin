@@ -9,6 +9,7 @@ in {
     unstablePkgs.nodejs
     unstablePkgs.yarn
     unstablePkgs.nodePackages.pnpm
+    unstablePkgs.bun
     unstablePkgs.python311
     unstablePkgs.python311Packages.uv
     unstablePkgs.python311Packages.pip
