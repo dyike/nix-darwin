@@ -21,6 +21,10 @@
     android-tools
   ];
 
+  fonts.packages = with pkgs; [
+    maple-mono.truetype
+  ];
+
   environment.variables.EDITOR = "nvim";
 
   # TODO To make this work, homebrew need to be installed manually, see https://brew.sh
