@@ -10,8 +10,10 @@
     # Set the primary user for system-wide activation
     primaryUser = username;
 
-    keyboard.enableKeyMapping = true;
-    keyboard.remapCapsLockToControl = true;
+    # Use native macOS keyboard behavior so the 中/英 key can switch input
+    # sources and long-press Caps Lock controls its indicator normally.
+    # keyboard.enableKeyMapping = true;
+    # keyboard.remapCapsLockToControl = true;
 
     defaults = {
       # clock 
