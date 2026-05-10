@@ -7,6 +7,7 @@
     ./tmux.nix
     ./alacritty.nix
     ./golang.nix
+    ./ai-skills.nix
   ];
 
   # Home Manager needs a bit of information about you and the
