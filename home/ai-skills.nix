@@ -26,5 +26,6 @@ in
 {
   home.file =
     mkSkillDirs ".claude/skills"
-    // mkSkillDirs ".codex/skills";
+    // mkSkillDirs ".codex/skills"
+    // mkSkillDirs ".coding_agent/skills";
 }
