@@ -26,6 +26,19 @@ in
 {
   home.file =
     mkSkillDirs ".claude/skills"
-    // mkSkillDirs ".codex/skills"
     // mkSkillDirs ".coding_agent/skills";
+
+  home.activation.materializeCodexSkills =
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      set -eu
+
+      target="${config.home.homeDirectory}/.codex/skills"
+      mkdir -p "$target"
+
+      ${lib.concatMapStringsSep "\n" (name: ''
+        rm -rf "$target/${name}"
+        mkdir -p "$target/${name}"
+        ${pkgs.rsync}/bin/rsync -aL --delete "${skillRoot}/${name}/" "$target/${name}/"
+      '') skillNames}
+    '';
 }
