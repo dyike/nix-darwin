@@ -5,6 +5,7 @@ in {
   home.packages = with pkgs; [
     asitop
     iperf3
+    gh
   ] ++ [
     unstablePkgs.nodejs
     unstablePkgs.yarn
