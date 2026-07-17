@@ -17,12 +17,11 @@ let
     # 添加到 PATH
     export PATH="$GOBIN:$PATH"
     
-    echo "已切换到工作 Go 环境：GOPATH=$GOPATH"
-    
     # 如果有参数，则执行 go 命令
     if [ $# -gt 0 ]; then
       exec ${unstablePkgs.go}/bin/go "$@"
     else
+      echo "已切换到工作 Go 环境：GOPATH=$GOPATH"
       # 否则打开一个新的 shell
       exec $SHELL
     fi
@@ -41,12 +40,11 @@ let
     # 添加到 PATH
     export PATH="$GOBIN:$PATH"
     
-    echo "已切换到个人 Go 环境：GOPATH=$GOPATH"
-    
     # 如果有参数，则执行 go 命令
     if [ $# -gt 0 ]; then
       exec ${unstablePkgs.go}/bin/go "$@"
     else
+      echo "已切换到个人 Go 环境：GOPATH=$GOPATH"
       # 否则打开一个新的 shell
       exec $SHELL
     fi

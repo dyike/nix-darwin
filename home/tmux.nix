@@ -56,6 +56,12 @@
       # 真彩色支持
       set -as terminal-overrides ',xterm*:RGB'
       set -g default-terminal "screen-256color"
+
+      # OSC52 剪贴板: 允许面板内程序(如 ssh 里的 modu_code)写外层终端剪贴板
+      # set-clipboard 默认 external 会忽略应用发的 OSC52; allow-passthrough 3.3a+ 默认 off
+      set -g set-clipboard on
+      set -g allow-passthrough on
+      set -as terminal-features ',alacritty*:clipboard,xterm*:clipboard'
     '';
   };
 }
