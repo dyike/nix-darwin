@@ -36,9 +36,15 @@ in
       mkdir -p "$target"
 
       ${lib.concatMapStringsSep "\n" (name: ''
-        rm -rf "$target/${name}"
+        if [ -L "$target/${name}" ]; then
+          rm -f "$target/${name}"
+        elif [ -e "$target/${name}" ]; then
+          chmod -R u+w "$target/${name}"
+          rm -rf "$target/${name}"
+        fi
+
         mkdir -p "$target/${name}"
-        ${pkgs.rsync}/bin/rsync -aL --delete "${skillRoot}/${name}/" "$target/${name}/"
+        ${pkgs.rsync}/bin/rsync -aL --delete --chmod=Du+w,Fu+w "${skillRoot}/${name}/" "$target/${name}/"
       '') skillNames}
     '';
 }

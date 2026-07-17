@@ -9,7 +9,7 @@ in {
   ] ++ [
     unstablePkgs.nodejs
     unstablePkgs.yarn
-    unstablePkgs.nodePackages.pnpm
+    unstablePkgs.pnpm
     unstablePkgs.bun
     unstablePkgs.python312
     unstablePkgs.python312Packages.uv
